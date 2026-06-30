@@ -537,8 +537,20 @@ function getNearestSunday(dayNumber) {
 
 function buildTime() {
   const grid = document.getElementById("timeGrid");
+  const customTimeInput = document.getElementById("customTimeInput");
+  const customTimeButton = document.getElementById("customTimeButton");
 
   grid.innerHTML = "";
+
+  const goToIce = (timeValue) => {
+    selectedTime = timeValue;
+
+    hearts(8);
+
+    setTimeout(() => {
+      showScreen("ice");
+    }, 500);
+  };
 
   times.forEach((time) => {
     const card = document.createElement("div");
@@ -547,17 +559,32 @@ function buildTime() {
     card.innerHTML = time;
 
     card.onclick = () => {
-      selectedTime = time;
-
-      hearts(8);
-
-      setTimeout(() => {
-        showScreen("ice");
-      }, 500);
+      goToIce(time);
     };
 
     grid.appendChild(card);
   });
+
+  if (customTimeInput && customTimeButton) {
+    customTimeInput.value = "18:00";
+
+    customTimeButton.onclick = () => {
+      const value = customTimeInput.value;
+
+      if (!value) {
+        return;
+      }
+
+      goToIce(value);
+    };
+
+    customTimeInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        customTimeButton.click();
+      }
+    });
+  }
 }
 
 /* ========================= */
