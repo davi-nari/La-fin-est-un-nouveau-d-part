@@ -19,7 +19,7 @@ let noButtonMoveHandler = null;
 
 // Вставь сюда URL Google Apps Script Web App после публикации скрипта.
 const GOOGLE_SHEETS_WEB_APP_URL =
-  "https://script.google.com/macros/s/AKfycbwb9bY2dIIY1LbE9sa8pk2td5K4cj6mJileTxIhAQ9JBixzOFxEC4bfFqUDYyq9LzEQ/exec";
+  "https://script.google.com/macros/s/AKfycbyvdZEppKk8ppL3MLcp26e7Czzc6iPWejHuZfz1RdQC9VyEe5XReORqnt3EYF1hqfuv/exec";
 
 // IP можно получить только через внешний сервис или на сервере.
 // Здесь используется прозрачный best-effort запрос к ipify; при ошибке сайт продолжит работать.
