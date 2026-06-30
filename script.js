@@ -9,7 +9,7 @@ const screenPhotos = {
   calendar: "day.png",
   time: "time.png",
   ice: "icecream.png",
-  final: "sunday.png",
+  final: "final.png",
 };
 
 let selectedDate = "";
