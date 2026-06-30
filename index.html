@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>La fin est un nouveau départ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Экран для телефона / планшета -->
+    <div class="pc-only-screen">
+      <div class="pc-only-card">
+        <div class="pc-only-emoji">
+          <svg>
+            <use href="#icon-laptop"></use>
+          </svg>
+        </div>
+
+        <h1>Ну просил же открыть на ПК...</h1>
+
+        <p>
+          Тут всё сделано красиво,<br />
+          но магия работает только на большом экране.
+        </p>
+
+        <div class="pc-only-note">Открой, пожалуйста, с компьютера</div>
+      </div>
+    </div>
+
+    <!-- Музыка -->
+    <audio id="music">
+      <source src="assets/music/Love_Me_Not.m4a" type="audio/mp4" />
+    </audio>
+
+    <!-- Фон -->
+    <div class="background">
+      <div class="blob pink"></div>
+      <div class="blob blue"></div>
+      <div class="blob yellow"></div>
+    </div>
+
+    <!-- Сердечки -->
+    <div id="hearts"></div>
+
+    <!-- Карточка -->
+    <div class="wrapper">
+      <img id="screenPhoto" class="screen-photo" alt="" aria-hidden="true" />
+
+      <div class="card" id="card">
+        <div id="content"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1 -->
+    <template id="intro">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-letter"></use>
+        </svg>
+      </div>
+
+      <h1>Я тут кое-что подготовил...</h1>
+
+      <p>Надеюсь тебе понравится.</p>
+
+      <button data-next="song">Начать →</button>
+    </template>
+
+    <!-- SCREEN 2 -->
+    <template id="song">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-music"></use>
+        </svg>
+      </div>
+
+      <h1>С песней я угадал?</h1>
+
+      <p>
+        Мне кажется,<br />
+        я знаю ответ.
+      </p>
+
+      <button data-next="question">Конечно ♥</button>
+    </template>
+
+    <!-- SCREEN 3 -->
+    <template id="question">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-cute"></use>
+        </svg>
+      </div>
+
+      <h1>Готова ко встрече?</h1>
+
+      <div class="buttons">
+        <button id="yes">Да ♥</button>
+        <button id="no">Нет</button>
+      </div>
+    </template>
+
+    <!-- SCREEN 4 -->
+    <template id="calendar">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-calendar"></use>
+        </svg>
+      </div>
+
+      <h1>Выбери день для встречи</h1>
+
+      <p id="calendarText">
+        Июль уже ждёт нас... но воскресенье выглядит особенно мило.
+      </p>
+
+      <div class="calendarTitle" id="calendarTitle"></div>
+      <div id="calendarGrid"></div>
+      <div id="calendarChoice"></div>
+    </template>
+
+    <!-- SCREEN 5 -->
+    <template id="time">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-clock"></use>
+        </svg>
+      </div>
+
+      <h1>Во сколько встретимся?</h1>
+
+      <div id="timeGrid"></div>
+    </template>
+
+    <!-- SCREEN 6 -->
+    <template id="ice">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-ice"></use>
+        </svg>
+      </div>
+
+      <h1>Какое мороженое будем есть?</h1>
+
+      <div id="iceGrid"></div>
+    </template>
+
+    <!-- SCREEN 7 -->
+    <template id="final">
+      <div class="emoji">
+        <svg>
+          <use href="#icon-heart"></use>
+        </svg>
+      </div>
+
+      <h1>Вот и договорились!</h1>
+
+      <p>До встречи</p>
+
+      <h2 id="finalTime">18:00</h2>
+
+      <p>Не опаздывай</p>
+    </template>
+
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
