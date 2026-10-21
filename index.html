@@ -39,7 +39,7 @@
 
     <!-- Музыка -->
     <audio id="music">
-      <source src="assets/music/Love_Me_Not.m4a" type="audio/mp4" />
+      <source src="assets/music/The Police - Every Breath You Take (Remastered 2003).mp3" type="audio/mpeg" />
     </audio>
 
     <!-- Фон -->
@@ -121,7 +121,7 @@
       <h1>Выбери день для встречи</h1>
 
       <p id="calendarText">
-        Июль уже ждёт нас... но воскресенье выглядит особенно мило.
+        Ноябрь уже ждёт нас... но воскресенье выглядит особенно мило.
       </p>
 
       <div class="calendarTitle" id="calendarTitle"></div>
@@ -159,13 +159,20 @@
     <template id="ice">
       <div class="emoji">
         <svg>
-          <use href="#icon-ice"></use>
+          <use href="#icon-heart"></use>
         </svg>
       </div>
 
-      <h1>Какое мороженое будем есть?</h1>
+      <h1>Чем займёмся на встрече?</h1>
 
       <div id="iceGrid"></div>
+      <div id="customActivity" class="activity-custom" hidden>
+        <label for="customActivityInput">Твоя идея для встречи</label>
+        <div class="activity-custom__controls">
+          <input id="customActivityInput" type="text" maxlength="120" placeholder="Напиши свой вариант..." />
+          <button id="customActivityButton" type="button">Выбрать ♥</button>
+        </div>
+      </div>
     </template>
 
     <!-- SCREEN 7 -->

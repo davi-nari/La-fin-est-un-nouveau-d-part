@@ -8,13 +8,13 @@ const screenPhotos = {
   question: null,
   calendar: "day.png",
   time: "time.png",
-  ice: "icecream.png",
+  ice: null,
   final: "final.png",
 };
 
 let selectedDate = "";
 let selectedTime = "";
-let selectedIce = "";
+let selectedActivity = "";
 let noButtonMoveHandler = null;
 
 // Вставь сюда URL Google Apps Script Web App после публикации скрипта.
@@ -29,7 +29,7 @@ let isSubmittingDatePlan = false;
 let hasSubmittedDatePlan = false;
 
 const calendarYear = 2026;
-const calendarMonth = 6;
+const calendarMonth = 10;
 
 const monthNames = [
   "Январь",
@@ -63,31 +63,16 @@ const sundayHints = [
   "Ну всё, календарь счастлив, я тоже.",
 ];
 
-const iceCream = [
-  {
-    name: "Клубничное",
-    type: "strawberry",
-  },
-  {
-    name: "Шоколадное",
-    type: "chocolate",
-  },
-  {
-    name: "Пломбир",
-    type: "vanilla",
-  },
-  {
-    name: "Oreo",
-    type: "oreo",
-  },
-  {
-    name: "Манго",
-    type: "mango",
-  },
-  {
-    name: "Лимонное",
-    type: "lemon",
-  },
+const activities = [
+  { name: "Боулинг", icon: "🎳" },
+  { name: "Каток", icon: "⛸️" },
+  { name: "Бильярд", icon: "🎱" },
+  { name: "Прогулка в парке", icon: "🌳" },
+  { name: "Покататься на горках", icon: "🎢" },
+  { name: "Сходить в кино", icon: "🎬" },
+  { name: "Поорать в кинотеатре", icon: "🍿" },
+  { name: "Прогулка по городу", icon: "🏙️" },
+  { name: "Свой вариант...", icon: "💡", custom: true },
 ];
 
 const times = ["15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
@@ -187,7 +172,7 @@ function bindIntro() {
     music.volume = 0;
 
     try {
-      music.currentTime = 17;
+      music.currentTime = 0;
     } catch (err) {
       console.log(err);
     }
@@ -427,7 +412,7 @@ function buildCalendar() {
 
       day.classList.add("selected");
 
-      selectedDate = `${dayNumber} июля ${calendarYear}`;
+      selectedDate = `${dayNumber} ноября ${calendarYear}`;
 
       if (isSunday) {
         day.classList.add("best");
@@ -494,7 +479,7 @@ function buildCalendar() {
         };
 
         document.getElementById("confirmAnyDate").onclick = () => {
-          text.innerHTML = `Окей, ${dayNumber} июля тоже звучит мило.`;
+          text.innerHTML = `Окей, ${dayNumber} ноября тоже звучит мило.`;
 
           hearts(8);
 
@@ -591,32 +576,51 @@ function buildTime() {
 
 function buildIce() {
   const grid = document.getElementById("iceGrid");
-
+  const customContainer = document.getElementById("customActivity");
+  const customInput = document.getElementById("customActivityInput");
+  const customButton = document.getElementById("customActivityButton");
   grid.innerHTML = "";
 
-  iceCream.forEach((item) => {
-    const card = document.createElement("div");
+  function chooseActivity(name) {
+    selectedActivity = name;
+    hearts(10);
+    setTimeout(() => showScreen("final"), 500);
+  }
 
+  activities.forEach((item) => {
+    const card = document.createElement("button");
+    card.type = "button";
     card.className = "ice";
-
-    card.innerHTML = `
-       <svg>
-          <use href="#icon-ice"></use>
-        </svg>
-      <span>${item.name}</span>
-    `;
+    const icon = document.createElement("span");
+    icon.className = "activity-icon";
+    icon.textContent = item.icon;
+    icon.setAttribute("aria-hidden", "true");
+    const name = document.createElement("span");
+    name.textContent = item.name;
+    card.append(icon, name);
 
     card.onclick = () => {
-      selectedIce = item.name;
-
-      hearts(10);
-
-      setTimeout(() => {
-        showScreen("final");
-      }, 500);
+      if (item.custom) {
+        customContainer.hidden = false;
+        customInput.focus();
+      } else {
+        chooseActivity(item.name);
+      }
     };
-
     grid.appendChild(card);
+  });
+
+  const submitCustom = () => {
+    const value = customInput.value.trim();
+    if (!value) {
+      customInput.focus();
+      return;
+    }
+    chooseActivity(value);
+  };
+  customButton.onclick = submitCustom;
+  customInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") submitCustom();
   });
 }
 
@@ -650,7 +654,7 @@ function finalMessage() {
       <br>
       <b>Время:</b> ${selectedTime}
       <br>
-      <b>Мороженое:</b> ${selectedIce}
+      <b>План:</b> ${selectedActivity}
       <br><br>
       С тебя хорошее настроение, остальное беру на себя
     </p>
@@ -670,7 +674,7 @@ function buildDatePlanPayload(ipInfo = {}) {
     received_at_client: now.toISOString(),
     selected_date: selectedDate,
     selected_time: selectedTime,
-    selected_ice: selectedIce,
+    selected_ice: selectedActivity,
     page_url: window.location.href,
     referrer: document.referrer || "",
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "",

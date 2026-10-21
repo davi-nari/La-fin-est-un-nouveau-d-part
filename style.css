@@ -524,6 +524,10 @@ button:active {
   gap: 18px;
 }
 
+#iceGrid button span {
+  color: #2f2f2f
+}
+
 #iceGrid svg {
   width: 32px;
   height: 32px;
@@ -1112,5 +1116,104 @@ body {
   .card[data-screen="calendar"] #calendarChoice {
     min-height: 40px;
     margin-top: 6px;
+  }
+}
+
+/* Activity choices */
+#iceGrid .ice { font-family: inherit; text-align: left; }
+#iceGrid .activity-icon { font-size: 29px; line-height: 1.2; flex: 0 0 auto; }
+.activity-custom { width: min(100%, 500px); margin-top: 20px; }
+.activity-custom[hidden] { display: none; }
+.activity-custom label { display: block; margin-bottom: 10px; font-weight: 700; }
+.activity-custom__controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.activity-custom__controls input { min-width: 0; flex: 1 1 180px; padding: 13px; border: 3px solid #2f2f2f; border-radius: 15px; font: inherit; }
+.activity-custom__controls button { flex: 0 0 auto; }
+
+/* November 2026: activity selection layout fix */
+@media (min-width: 1025px) {
+  .card[data-screen="ice"] {
+    padding: clamp(18px, 3vh, 30px) clamp(22px, 3vw, 38px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .card[data-screen="ice"]::-webkit-scrollbar { display: block; width: 6px; }
+
+  .card[data-screen="ice"] #content {
+    height: auto;
+    min-height: 100%;
+    justify-content: center;
+    padding: 4px 0;
+  }
+
+  .card[data-screen="ice"] .emoji {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  .card[data-screen="ice"] h1 {
+    font-size: clamp(23px, 2.5vw, 30px);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .card[data-screen="ice"] #iceGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 490px);
+    gap: 12px;
+    margin: 0 auto;
+  }
+
+  .card[data-screen="ice"] #iceGrid .ice {
+    width: 100%;
+    min-width: 0;
+    min-height: 57px;
+    padding: 11px 12px;
+    border: 3px solid #2f2f2f;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.2;
+    text-align: left;
+    justify-content: flex-start;
+    gap: 10px;
+    white-space: normal;
+    box-shadow: 4px 4px 0 #2f2f2f;
+  }
+
+  .card[data-screen="ice"] #iceGrid .activity-icon {
+    font-size: 25px;
+    line-height: 1;
+    width: 30px;
+    text-align: center;
+  }
+
+  .card[data-screen="ice"] #iceGrid .ice:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(100%, 245px);
+  }
+
+  .card[data-screen="ice"] .activity-custom {
+    width: min(100%, 490px);
+    margin-top: 14px;
+    padding-bottom: 8px;
+  }
+
+  .card[data-screen="ice"] .activity-custom label {
+    margin-bottom: 7px;
+    font-size: 15px;
+  }
+
+  .card[data-screen="ice"] .activity-custom__controls input {
+    padding: 9px 12px;
+    font-size: 15px;
+  }
+
+  .card[data-screen="ice"] .activity-custom__controls button {
+    padding: 10px 15px;
+    font-size: 15px;
   }
 }
